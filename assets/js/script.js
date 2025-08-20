@@ -1,27 +1,3 @@
-/*-----------------------------------------------------------------------------------
-    Template Name: Qomfort - Hotel Booking HTML Template
-    Template URI: https://demo.webtend.net/html/qomfort/
-    Author: WebTend
-    Author URI:  https://webtend.net/
-    Version: 1.0
-
-    Note: This is Main JS File.
------------------------------------------------------------------------------------
-	CSS INDEX
-	===================
-    ## Header Style
-    ## Dropdown menu
-    ## Submenu Dropdown
-    ## Menu Hidden Sidebar
-    ## OnePage Nav
-    ## Testimonials
-    ## Project Filter
-    ## Fact Counter
-    ## Scroll to Top
-    ## Nice Select
-    ## Preloader
-    ## Blog Standard
------------------------------------------------------------------------------------*/
 
 (function ($) {
 
