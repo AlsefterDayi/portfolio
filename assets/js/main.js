@@ -127,6 +127,49 @@ const skills = {
     },
   ],
 };
+let projects = [
+  {
+    id: 1,
+    title: "LNS e-commerce Website",
+    img: "assets/images/project1.jpg",
+    work: "Frontend of Website and mobile application",
+    description: `I worked on the development of the corporate website for LNS International (lnsint.net),
+                                focusing on creating a responsive, user-friendly interface and ensuring modern design
+                                standards.`,
+    link: "https://lnsint.net",
+  },
+  {
+    id: 2,
+    title: "LifeTravel - Website Design",
+    img: "assets/images/project2.jpg",
+    work: "Front and Backend of website",
+    description: `Developed the full-stack web application for LifeTravel, covering both front-end and
+                                back-end. Focused on responsive UI/UX, secure APIs, and smooth booking features for a
+                                better travel experience.`,
+    link: "https://lnstravel.net/en",
+  },
+  {
+    id: 3,
+    title: "aloustam.az",
+    img: "assets/images/project3.jpg",
+    work: "Fullstack Website",
+    description: `Built the full-stack platform aloustam.az, connecting skilled craftsmen with customers.
+                                Implemented responsive front-end, secure authentication, and efficient back-end logic to
+                                ensure smooth posting and browsing of job listings.`,
+    link: "",
+  },
+  {
+    id: 4,
+    title: "Managment System of Schools and Courses",
+    img: "assets/images/project4.jpg",
+    work: "Managment system",
+    description: `Developed a modern school management system that streamlines student enrollment, class
+                                scheduling, exams, and teacher management. Focused on building a user-friendly
+                                interface, secure data handling, and efficient performance to meet the needs of
+                                educational institutions.`,
+    link: "",
+  },
+];
 
 let yearCounterHero = document.querySelector(".year-count-hero");
 let projectCounterHero = document.querySelector(".project-count-hero");
@@ -146,6 +189,17 @@ let expGrid = document.querySelector(".exp-grid");
 let skillsHeader = document.querySelector(".skill-content-part h2");
 let skillsText = document.querySelector(".skill-content-part p");
 let skillsGrid = document.querySelector(".skills-grid");
+let projectList = document.querySelector(".projects-area .container");
+let projectListFirst = `<div class="row justify-content-center">
+                    <div class="col-xl-12">
+                        <div class="section-title text-center mb-60 wow fadeInUp delay-0-2s">
+                            <span class="sub-title mb-15">Latest Works</span>
+                            <h2>Explore My <span>Projects</span></h2>
+                        </div>
+                    </div>
+                </div>`;
+
+let projectsHtml = "";
 
 yearCounterHero.setAttribute(
   "data-stop",
@@ -199,3 +253,32 @@ skills.skills.forEach((skill) => {
       </div>
     </div>`;
 });
+let projectCount = 1;
+let projectStyle = "";
+projects.forEach((project) => {
+  projectStyle = projectCount % 2 === 0 ? "flex-direction: row-reverse;" : "";
+  projectsHtml += `
+    <div class="row project-flex-direction align-items-center pb-25" style="${projectStyle}">
+                    <div class="col-lg-6">
+                        <div class="project-image wow fadeInLeft delay-0-2s">
+                            <img src="${project.img}" alt="Project">
+
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-6">
+                        <div class="project-content wow fadeInRight delay-0-2s">
+                            <span class="sub-title">${project.title}</span>
+
+                            <h2><a href="${project.link}" target="_blank">${project.work}</a></h2>
+
+                            <p>${project.description}</p>
+
+                            <a target="_blank" href="${project.link}" class="details-btn"><i
+
+                                    class="far fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>`;
+  projectCount++;
+});
+projectList.innerHTML = projectListFirst + projectsHtml ;
