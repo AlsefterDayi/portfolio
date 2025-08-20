@@ -170,6 +170,18 @@ let projects = [
     link: "",
   },
 ];
+const contactContent = {
+  header: "Let’s Talk For your <span>Next Projects</span>",
+  text: `Let’s bring your ideas to life together. Reach out and we’ll find the best
+                                    solutionfor your next project.`,
+  list: [
+    "5+ Years of Experience in Web Development",
+    "Professional Frontend Developer",
+    "Fullstack Project Development",
+    "API Integration & Database Management",
+    "Custom Web Application Support",
+  ],
+};
 
 let yearCounterHero = document.querySelector(".year-count-hero");
 let projectCounterHero = document.querySelector(".project-count-hero");
@@ -198,8 +210,10 @@ let projectListFirst = `<div class="row justify-content-center">
                         </div>
                     </div>
                 </div>`;
-
 let projectsHtml = "";
+let contactUsHeader = document.querySelector(".contactus h2");
+let contactUsText = document.querySelector(".contactus p");
+let contactUsList = document.querySelector(".contactus ul");
 
 yearCounterHero.setAttribute(
   "data-stop",
@@ -281,4 +295,9 @@ projects.forEach((project) => {
                 </div>`;
   projectCount++;
 });
-projectList.innerHTML = projectListFirst + projectsHtml ;
+projectList.innerHTML = projectListFirst + projectsHtml;
+contactUsHeader.innerHTML = contactContent.header;
+contactUsText.innerHTML = contactContent.text;
+contactContent.list.forEach((item) => {
+  contactUsList.innerHTML += `<li>${item}</li>`;
+});
