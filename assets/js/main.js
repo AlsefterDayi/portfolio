@@ -66,6 +66,67 @@ const experiences = [
     duration: "07/2013 - 09/2015",
   },
 ];
+const skills = {
+  header: "Let’s Explore Popular <span>Skills & Experience</span>",
+  text: `With a strong background in frontend development, I specialize in building
+                                        modern, responsive, and user-friendly web applications.
+                                        I have experience working with Angular, JavaScript, and SCSS to create seamless
+                                        user interfaces, while integrating APIs and ensuring performance optimization.
+                                        My focus is always on writing clean, maintainable code and delivering digital
+                                        solutions that bring real value to users.`,
+  skills: [
+    {
+      id: 1,
+      title: "HTML5",
+      percent: "100%",
+      img: "assets/images/skill1.png",
+    },
+    {
+      id: 2,
+      title: "CSS3",
+      percent: "100%",
+      img: "assets/images/skill2.png",
+    },
+    {
+      id: 3,
+      title: "SCSS",
+      percent: "90%",
+      img: "assets/images/skill3.png",
+    },
+    {
+      id: 4,
+      title: "JavaScript",
+      percent: "95%",
+      img: "assets/images/skill4.png",
+    },
+
+    {
+      id: 5,
+      title: "Jquery",
+      percent: "50%",
+      img: "assets/images/skill5.png",
+    },
+    {
+      id: 6,
+      title: "React",
+      percent: "30%",
+      img: "assets/images/skill6.png",
+    },
+
+    {
+      id: 7,
+      title: "Angular",
+      percent: "80%",
+      img: "assets/images/skill7.png",
+    },
+    {
+      id: 8,
+      title: "PHP",
+      percent: "90%",
+      img: "assets/images/skill8.png",
+    },
+  ],
+};
 
 let yearCounterHero = document.querySelector(".year-count-hero");
 let projectCounterHero = document.querySelector(".project-count-hero");
@@ -82,6 +143,9 @@ let contactEmail = document.querySelector(".mail");
 let contactPhone = document.querySelector(".phone");
 let aboutImg = document.querySelector(".about-image-part img");
 let expGrid = document.querySelector(".exp-grid");
+let skillsHeader = document.querySelector(".skill-content-part h2");
+let skillsText = document.querySelector(".skill-content-part p");
+let skillsGrid = document.querySelector(".skills-grid");
 
 yearCounterHero.setAttribute(
   "data-stop",
@@ -120,6 +184,18 @@ experiences.forEach((exp) => {
           <h4>${exp.position}</h4>
           <span class="company">${exp.company}</span>
         </div>
+      </div>
+    </div>`;
+});
+skillsHeader.innerHTML = skills.header;
+skillsText.innerHTML = skills.text;
+skills.skills.forEach((skill) => {
+  skillsGrid.innerHTML += `
+    <div class="col-xl-3 col-lg-4 col-md-6">
+      <div class="skill-item wow fadeInUp delay-0-2s">
+        <img src="${skill.img}" alt="${skill.title}">
+        <h5>${skill.title}</h5>
+        <span class="percent">${skill.percent}</span>
       </div>
     </div>`;
 });
