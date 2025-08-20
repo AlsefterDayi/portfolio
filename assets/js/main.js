@@ -195,7 +195,10 @@ let aboutMeHeader = document.querySelector(".aboutme-content h2");
 let aboutMeText = document.querySelector(".aboutme-content p");
 let aboutMeSkills = document.querySelector(".about-skills");
 let contactEmail = document.querySelector(".mail");
+let footerMail = document.querySelector(".footer-mail");
 let contactPhone = document.querySelector(".phone");
+let footerPhone = document.querySelector(".footer-phone");
+footerAddress = document.querySelector(".footer-address");
 let aboutImg = document.querySelector(".about-image-part img");
 let expGrid = document.querySelector(".exp-grid");
 let skillsHeader = document.querySelector(".skill-content-part h2");
@@ -234,8 +237,13 @@ aboutMeSkills.innerHTML = aboutMe.skills
   .join("");
 contactEmail.setAttribute("href", `mailto:${contactDetails.email}`);
 contactEmail.innerHTML = contactDetails.email;
+footerMail.setAttribute("href", `mailto:${contactDetails.email}`);
+footerMail.innerHTML = contactDetails.email;
 contactPhone.setAttribute("href", `callto:${contactDetails.phone}`);
 contactPhone.innerHTML = contactDetails.phone;
+footerPhone.setAttribute("href", `callto:${contactDetails.phone}`);
+footerPhone.innerHTML = contactDetails.phone;
+footerAddress.innerHTML = contactDetails.address;
 aboutImg.setAttribute("src", aboutMe.img);
 if (aboutMe.img) {
   aboutImg.setAttribute("alt", "About Me");
