@@ -103,7 +103,7 @@
             <div>
                 <div class="small text-muted">ACTIONS</div>
                 <div class="d-grid gap-2 mt-2">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                    <button class="btn btn-primary" data-bs-toggle="modal" onclick="showModal()">
                         <i class="bi bi-plus-lg me-1"></i>Add Project
                     </button>
                 </div>
@@ -130,7 +130,7 @@
                                 class="bi bi-gear me-2"></i>Settings</a></li>
                 </ul>
                 <hr>
-                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" onclick="showModal()">
                     <i class="bi bi-plus-lg me-1"></i>Add Project
                 </button>
             </div>
@@ -147,7 +147,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="text-muted small">Projects</div>
-                                    <div class="fs-4 fw-bold">18</div>
+                                    <div class="fs-4 fw-bold" id="projectCount"></div>
                                 </div>
                                 <i class="bi bi-kanban fs-2 text-primary"></i>
                             </div>
@@ -188,113 +188,111 @@
             </div>
 
             <!-- Projects Table -->
-            <section id="projects" class="mt-4">
+            <section id="projects" class="container my-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Projects</h5>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
-                        <i class="bi bi-plus-lg me-1"></i>Add Project
+                    <h2>My Projects</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" onclick="showModal()">
+                        + Add Project
                     </button>
                 </div>
-                <div class="card shadow-sm">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Updated</th>
-                                    <th class="text-end">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>Lifetravel – Full-stack</td>
-                                    <td><span class="badge bg-success-subtle text-success">Live</span></td>
-                                    <td>2025-08-10</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>02</td>
-                                    <td>aloustam.az – Full-stack</td>
-                                    <td><span class="badge bg-warning-subtle text-warning">In Progress</span></td>
-                                    <td>2025-08-01</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>03</td>
-                                    <td>School Management System</td>
-                                    <td><span class="badge bg-secondary-subtle text-secondary">Planning</span></td>
-                                    <td>2025-07-20</td>
-                                    <td class="text-end">
-                                        <button class="btn btn-sm btn-outline-secondary"><i
-                                                class="bi bi-pencil"></i></button>
-                                        <button class="btn btn-sm btn-outline-danger"><i
-                                                class="bi bi-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Work</th>
+                            <th>Description</th>
+                            <th>Link</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectList"></tbody>
+                </table>
             </section>
+
+
+
 
 
 
             <footer class="text-center text-muted small py-4">© 2025 — Portfolio Admin</footer>
         </main>
     </div>
-
-    <!-- Add Project Modal -->
-    <div class="modal fade" id="addProjectModal" tabindex="-1">
-        <div class="modal-dialog">
-            <form class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add New Project</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body row g-3">
-                    <div class="col-12">
-                        <label class="form-label">Title</label>
-                        <input class="form-control" required>
+    <!-- Add/Edit Project Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="projectForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Add New Project</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="col-12">
-                        <label class="form-label">Status</label>
-                        <select class="form-select">
-                            <option>Planning</option>
-                            <option>In Progress</option>
-                            <option>Live</option>
-                            <option>Archived</option>
-                        </select>
+                    <div class="modal-body">
+                        <input type="hidden" id="projectId" />
+                        <div class="mb-3">
+                            <label class="form-label">Project Title</label>
+                            <input redquired type="text" class="form-control" id="projectTitle" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Work</label>
+                            <input redquired type="text" class="form-control" id="projectWork" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="projectDesc" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Project Link</label>
+                            <input type="text" class="form-control" id="projectLink" />
+                        </div>
                     </div>
-                    <div class="col-12">
-                        <label class="form-label">Short Description</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                    <div class="modal-footer">
+                        <button id="submitBtn" type="submit" class="btn btn-success">Save Project</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Add</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script>
+        renderProjects();
+        document.getElementById("submitBtn").addEventListener("click", function (e) {
+            e.preventDefault();
+            console.log("Form submitted");
 
+            const id = document.getElementById("projectId").value;
+            const newProject = {
+                id: id ? parseInt(id) : projects.length + 1,
+                title: document.getElementById("projectTitle").value,
+                work: document.getElementById("projectWork").value,
+                description: document.getElementById("projectDesc").value,
+                link: document.getElementById("projectLink").value,
+            };
+
+            if (id) {
+                // Update
+                const index = projects.findIndex((p) => p.id === parseInt(id));
+                projects[index] = newProject;
+            } else {
+                // Add
+                projects.push(newProject);
+            }
+
+            renderProjects();
+            projectCounAdmin();
+
+            const modal = bootstrap.Modal.getInstance(
+                document.getElementById("projectModal")
+            );
+            modal.hide();
+            this.reset();
+        });
+        projectCounAdmin();
+    </script>
 </body>
 
 </html>

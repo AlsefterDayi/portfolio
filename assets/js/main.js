@@ -217,6 +217,7 @@ let projectsHtml = "";
 let contactUsHeader = document.querySelector(".contactus h2");
 let contactUsText = document.querySelector(".contactus p");
 let contactUsList = document.querySelector(".contactus ul");
+let projectCountAdmin = document.getElementById("projectCount");
 
 yearCounterHero.setAttribute(
   "data-stop",
@@ -309,3 +310,64 @@ contactUsText.innerHTML = contactContent.text;
 contactContent.list.forEach((item) => {
   contactUsList.innerHTML += `<li>${item}</li>`;
 });
+
+function renderProjects() {
+  const projectList = document.getElementById("projectList");
+  projectList.innerHTML = "";
+
+  projects.forEach((p) => {
+    projectList.innerHTML += `
+      <tr>
+        <td>${p.id}</td>
+        <td>${p.title}</td>
+        <td>${p.work}</td>
+        <td>${p.description}</td>
+        <td>${
+          p.link ? `<a href="${p.link}" target="_blank">Visit</a>` : "-"
+        }</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" onclick="editProject(${
+            p.id
+          })">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteProject(${
+            p.id
+          })">Delete</button>
+        </td>
+      </tr>`;
+  });
+}
+// Add or Update project
+
+// Edit project
+function editProject(id) {
+  const project = projects.find((p) => p.id === id);
+  document.getElementById("projectId").value = project.id;
+  document.getElementById("projectTitle").value = project.title;
+  document.getElementById("projectWork").value = project.work;
+  document.getElementById("projectDesc").value = project.description;
+  document.getElementById("projectLink").value = project.link;
+
+  document.getElementById("modalTitle").innerText = "Edit Project";
+
+  new bootstrap.Modal(document.getElementById("projectModal")).show();
+}
+
+// Delete project
+function deleteProject(id) {
+  if (confirm("Are you sure you want to delete this project?")) {
+    projects = projects.filter((p) => p.id !== id);
+    renderProjects();
+    projectCounAdmin();
+  }
+}
+
+function showModal() {
+  document.getElementById("projectForm").reset();
+  document.getElementById("modalTitle").innerText = "Add New Project";
+  document.getElementById("projectId").value = "";
+
+  new bootstrap.Modal(document.getElementById("projectModal")).show();
+}
+function projectCounAdmin() {
+  projectCountAdmin.innerText = projects.length;
+}
