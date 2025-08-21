@@ -98,6 +98,8 @@
                                 class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects"><i
                                 class="bi bi-kanban me-2"></i>Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#messages"><i
+                                class="bi bi-envelope me-2"></i>Messages</a></li>
                 </ul>
             </div>
             <div>
@@ -122,12 +124,9 @@
                                 class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#projects"><i
                                 class="bi bi-kanban me-2"></i>Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#blog"><i
-                                class="bi bi-journal-text me-2"></i>Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#messages"><i
+                    <li class="nav-item"><a class="nav-link" href="#messages"><i
                                 class="bi bi-envelope me-2"></i>Messages</a></li>
-                    <li class="nav-item"><a class="nav-link" data-bs-dismiss="offcanvas" href="#settings"><i
-                                class="bi bi-gear me-2"></i>Settings</a></li>
+
                 </ul>
                 <hr>
                 <button class="btn btn-primary w-100" data-bs-toggle="modal" onclick="showModal()">
@@ -211,7 +210,23 @@
                 </table>
             </section>
 
-
+            <!-- Messages Table -->
+            <section id="messages" class="container my-5">
+                <h2>Messages</h2>
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messageList"></tbody>
+                </table>
+            </section>
 
 
 
@@ -292,6 +307,8 @@
             this.reset();
         });
         projectCounAdmin();
+        renderMessages()
+
     </script>
 </body>
 

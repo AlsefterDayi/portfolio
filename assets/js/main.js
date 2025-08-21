@@ -371,3 +371,92 @@ function showModal() {
 function projectCounAdmin() {
   projectCountAdmin.innerText = projects.length;
 }
+function saveMessage() {
+  // inputlardan dəyərləri götürək
+  const name = document.querySelector('input[name="name"]').value.trim();
+  const email = document.querySelector('input[name="email"]').value.trim();
+  const message = document.querySelector("textarea").value.trim();
+
+  // === Validation hissəsi ===
+  if (!name) {
+    alert("Name field cannot be empty!");
+    return;
+  }
+
+  if (!email) {
+    alert("Email field cannot be empty!");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address!");
+    return;
+  }
+
+  if (!message) {
+    alert("Message field cannot be empty!");
+    return;
+  }
+
+  // Əvvəldən saxlanmış dataları götürək
+  let savedForms = JSON.parse(localStorage.getItem("appointments")) || [];
+
+  // Yeni id yaratmaq (əgər boşdursa id = 1, yoxsa sonuncunun +1)
+  const newId =
+    savedForms.length > 0 ? savedForms[savedForms.length - 1].id + 1 : 1;
+
+  // obyektə yığaq
+  const formData = {
+    id: newId,
+    name: name,
+    email: email,
+    message: message,
+    date: new Date().toLocaleString(),
+  };
+
+  // yeni formu əlavə edək
+  savedForms.push(formData);
+
+  // yenilənmiş datanı localStorage-a yaz
+  localStorage.setItem("appointments", JSON.stringify(savedForms));
+
+  alert("Form data has been saved successfully! ✅");
+
+  // formu təmizləmək üçün
+  document.getElementById("appointment-form").reset();
+}
+
+// Submit zamanı işləsin
+document
+  .getElementById("appointment-submit")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    saveMessage();
+  });
+function renderMessages() {
+  const tbody = document.getElementById("messageList");
+  tbody.innerHTML = "";
+
+  let savedForms = JSON.parse(localStorage.getItem("appointments")) || [];
+  savedForms.forEach((form, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${form.name}</td>
+          <td>${form.email}</td>
+          <td>${form.message}</td>
+          <td>${form.date}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="deleteMessage(${i})">Delete</button></td>
+        `;
+    tbody.appendChild(tr);
+  });
+  document.getElementById("messageCount").innerText = savedForms.length;
+}
+
+function deleteMessage(index) {
+  let savedForms = JSON.parse(localStorage.getItem("appointments")) || [];
+  savedForms.splice(index, 1);
+  localStorage.setItem("appointments", JSON.stringify(savedForms));
+  renderMessages();
+}
